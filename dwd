@@ -1,0 +1,46 @@
+[1mdiff --git a/sprint/pereval/__pycache__/urls.cpython-311.pyc b/sprint/pereval/__pycache__/urls.cpython-311.pyc[m
+[1mdeleted file mode 100644[m
+[1mindex 0b8c150..0000000[m
+Binary files a/sprint/pereval/__pycache__/urls.cpython-311.pyc and /dev/null differ
+[1mdiff --git a/sprint/sprint/__pycache__/settings.cpython-311.pyc b/sprint/sprint/__pycache__/settings.cpython-311.pyc[m
+[1mindex bf9c607..221e1b2 100644[m
+Binary files a/sprint/sprint/__pycache__/settings.cpython-311.pyc and b/sprint/sprint/__pycache__/settings.cpython-311.pyc differ
+[1mdiff --git a/sprint/sprint/__pycache__/urls.cpython-311.pyc b/sprint/sprint/__pycache__/urls.cpython-311.pyc[m
+[1mindex 81a7ff3..498a536 100644[m
+Binary files a/sprint/sprint/__pycache__/urls.cpython-311.pyc and b/sprint/sprint/__pycache__/urls.cpython-311.pyc differ
+[1mdiff --git a/sprint/sprint/settings.py b/sprint/sprint/settings.py[m
+[1mindex a1c4f06..ba762b5 100644[m
+[1m--- a/sprint/sprint/settings.py[m
+[1m+++ b/sprint/sprint/settings.py[m
+[36m@@ -131,4 +131,5 @@[m [mSTATIC_URL = 'static/'[m
+ [m
+ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'[m
+ [m
+[31m-MEDIA_URL = '/media/'[m
+\ No newline at end of file[m
+[32m+[m[32mMEDIA_URL = '/media/'[m
+[32m+[m[32mMEDIA_ROOT = os.path.join(BASE_DIR, 'media/')[m
+\ No newline at end of file[m
+[1mdiff --git a/sprint/sprint/urls.py b/sprint/sprint/urls.py[m
+[1mindex 421d094..c525032 100644[m
+[1m--- a/sprint/sprint/urls.py[m
+[1m+++ b/sprint/sprint/urls.py[m
+[36m@@ -16,9 +16,17 @@[m [mIncluding another URLconf[m
+ """[m
+ from django.contrib import admin[m
+ from django.urls import path, include[m
+[32m+[m[32mfrom rest_framework import routers[m
+[32m+[m[32mfrom pereval import views[m
+ [m
+[32m+[m[32mrouter = routers.DefaultRouter()[m
+[32m+[m[32mrouter.register(r'user', views.UserViewSet)[m
+[32m+[m[32mrouter.register(r'pereval', views.PerevalViewSet)[m
+[32m+[m[32mrouter.register(r'coords', views.CoordsViewSet)[m
+[32m+[m[32mrouter.register(r'images', views.ImagesViewSet)[m
+[32m+[m[32mrouter.register(r'level', views.LevelViewSet)[m
+ [m
+ urlpatterns = [[m
+     path('admin/', admin.site.urls),[m
+[31m-    path('', include('pereval.urls'))[m
+[32m+[m[32m    path('', include(router.urls)),[m
+ ][m
